@@ -1,23 +1,23 @@
-# Airflow
+# Airflow (latest stable)
 apache-airflow==2.8.1
-apache-airflow-providers-postgres==5.7.1
-apache-airflow-providers-http==4.6.0
+apache-airflow-providers-postgres==5.10.2
+apache-airflow-providers-http==4.10.0
 
-# Spark
-pyspark==3.4.1
+# Spark (latest stable for Python 3.11)
+pyspark==3.5.0
 
-# Database
+# Database (Airflow-compatible SQLAlchemy)
 psycopg2-binary==2.9.9
-sqlalchemy==2.0.23
+sqlalchemy==1.4.51
 
 # HTTP/APIs
 requests==2.31.0
-httpx==0.25.1
+httpx==0.26.0
 
 # Data Processing
-pandas==2.0.3
-numpy==1.24.3
+pandas==2.2.0
+numpy==1.26.3
 
 # Utilities
-python-dotenv==1.0.0
+python-dotenv==1.0.1
 pyyaml==6.0.1
