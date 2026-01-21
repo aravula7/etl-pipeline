@@ -1,0 +1,40 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+venv/
+env/
+.venv
+
+# Data
+*.csv
+*.parquet
+*.json
+data/raw/
+data/processed/
+
+# Logs
+logs/
+*.log
+
+# Environment
+.env
+credentials.txt
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+
+# Airflow
+airflow.db
+airflow-webserver.pid
+standalone_admin_password.txt
+
+# Spark
+spark-warehouse/
+metastore_db/
+derby.log

@@ -1,0 +1,59 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:14
+    container_name: etl_postgres
+    environment:
+      POSTGRES_USER: airflow
+      POSTGRES_PASSWORD: airflow
+      POSTGRES_DB: airflow
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - etl_network
+
+  airflow-webserver:
+    image: apache/airflow:2.7.3-python3.11
+    container_name: etl_airflow_webserver
+    env_file:
+      - .env
+    volumes:
+      - ./dags:/opt/airflow/dags
+      - ./spark_jobs:/opt/airflow/spark_jobs
+      - ./external_apis:/opt/airflow/external_apis
+      - ./logs:/opt/airflow/logs
+      - ./config/airflow:/opt/airflow/config
+    ports:
+      - "8081:8080"
+    depends_on:
+      - postgres
+    networks:
+      - etl_network
+    command: webserver
+
+  airflow-scheduler:
+    image: apache/airflow:2.7.3-python3.11
+    container_name: etl_airflow_scheduler
+    env_file:
+      - .env
+    volumes:
+      - ./dags:/opt/airflow/dags
+      - ./spark_jobs:/opt/airflow/spark_jobs
+      - ./external_apis:/opt/airflow/external_apis
+      - ./logs:/opt/airflow/logs
+      - ./config/airflow:/opt/airflow/config
+    depends_on:
+      - postgres
+    networks:
+      - etl_network
+    command: scheduler
+
+volumes:
+  postgres_data:
+
+networks:
+  etl_network:
+    driver: bridge
